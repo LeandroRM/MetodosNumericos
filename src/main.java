@@ -1,5 +1,5 @@
 
-import MetodosIterativos.Jacobi;
+import MetodosIterativos.GaussSiedel;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -18,6 +18,25 @@ public class main {
      */
     public static void main(String[] args) {
         double[][] matriz = new double[5][6];
+
+        //TRABALHO
+//        matriz[0][0] = 8;
+//        matriz[0][1] = 0;
+//        matriz[0][2] = -1;
+//        matriz[0][3] = 0;
+//        matriz[0][4] = 0;
+//        
+//        matriz[1][0] = 9;
+//        matriz[1][1] = 0;
+//        matriz[1][2] = 0;
+//        matriz[1][3] = -1;
+//        matriz[1][4] = 0;
+//        
+//        matriz[2][0] = 0;
+//        matriz[2][1] = 2;
+//        matriz[2][2] = -2;
+//        matriz[2][3] = -1;
+//        matriz[2][4] = 0;
         
         matriz[0][0] = 5;
         matriz[0][1] = 0;
@@ -54,9 +73,10 @@ public class main {
         matriz[4][4] = 2;
         matriz[4][5] = -1;
         
-        Jacobi jacobi = new Jacobi(matriz, new double[]{1,1,1,1,1});
+//        Jacobi metodo = new Jacobi(matriz, new double[]{1,1,1,1,1});
+        GaussSiedel metodo = new GaussSiedel(matriz, new double[]{1,1,1,1,1});
         
-        System.out.println(jacobi.resultado());
+        System.out.println(metodo.resultado());
     }
     
 }

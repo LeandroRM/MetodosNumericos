@@ -11,15 +11,16 @@ import java.math.BigDecimal;
  *
  * @author Leandro Ramos Marcelino <leandroramosmarcelino@hotmail.com>
  */
-public class Jacobi {
+public class GaussSiedel {
     private final double[][] matrizAumentada;
     private final double[] valoresIniciais;
     private BigDecimal[] valoresFinais;
     private int iteracoes;
 
-    public Jacobi(double[][] matrizAumentada, double[] valoresIniciais) {
+    public GaussSiedel(double[][] matrizAumentada, double[] valoresIniciais) {
         this.matrizAumentada = matrizAumentada;
         this.valoresIniciais = valoresIniciais;
+        
         valoresFinais = converteParaBig(valoresIniciais);
         iteracoes = 0;
         
@@ -37,9 +38,10 @@ public class Jacobi {
         BigDecimal novoValor;
         BigDecimal[] proximosValores = new BigDecimal[valoresFinais.length];
         boolean stop = false;
-        
-//        proximosValores = copyArray(valoresFinais);
+        BigDecimal valorX;
+        proximosValores = copyArray(valoresFinais);
             
+        
         while (!stop) {
             iteracoes++;
 
@@ -49,7 +51,12 @@ public class Jacobi {
                 for (int j = 0; j < matrizAumentada[i].length -1; j++) { //COLUNAS
                     //Os valores na diagonal da matriz serão utilizados posteriormente
                     if (j != i) {
-                        novoValor = novoValor.add(BigDecimal.valueOf(matrizAumentada[i][j]).multiply(BigDecimal.valueOf(-1)).multiply(valoresFinais[j]));
+                        if (j < i) {
+                            valorX = proximosValores[j];
+                        } else {
+                            valorX = valoresFinais[j];
+                        }
+                        novoValor = novoValor.add(BigDecimal.valueOf(matrizAumentada[i][j]).multiply(BigDecimal.valueOf(-1)).multiply(valorX));
                     }
                 }
 
@@ -106,5 +113,5 @@ public class Jacobi {
         }
         
         return clone;
-    }
+    }   
 }
